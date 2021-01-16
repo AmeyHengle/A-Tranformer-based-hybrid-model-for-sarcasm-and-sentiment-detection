@@ -84,10 +84,8 @@ def get_label_encoding(labels):
   label_encodings = le.transform(labels)
   
   print("Mapping:")
-  for c,l in zip(le.classes_, label_encodings):
-    print(c,":",l,"\t")
-  print("\n")
-
+  le_name_mapping = dict(zip(le.classes_, le.transform(le.classes_)))
+  print(le_name_mapping)
   label_encodings = label_encodings.reshape(label_encodings.shape[0], -1)
   return label_encodings
 
@@ -144,6 +142,27 @@ def get_sentence_embedding(embedding_matrix, corpus, option='bow'):
         print("Invalid option")
         return text
 
+    
+# Save Fasttext trained embeddings to a .vec file.
+def save_fasttext_embeddings(model, output_file):
+    file = open(output_file, "w",encoding='utf')
+    words = model.get_words()
+    print('Input Vocab:\t',str(len(words)), "\nModel Dimensions: ",str(model.get_dimension()))
+    cnt = 0
+    for w in words:
+        v = model.get_word_vector(w)
+        vstr = ""
+        for vi in v:
+            vstr += " " + str(vi)
+        try:
+            row = w + vstr + "\n"
+            file.write(row)
+            cnt = cnt + 1
+        except IOError as e:
+            if e.errno == errno.EPIPE:
+                pass
+    print('Total words processed: ',cnt)
+    
 
 # Evaluate model performace timeline.
 def plot_results(model_history):
