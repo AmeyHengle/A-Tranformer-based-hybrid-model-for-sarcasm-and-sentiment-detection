@@ -3,6 +3,7 @@
 import pandas as pd
 import numpy as np
 import re
+import string
 from matplotlib import pyplot as plt
 
 import tensorflow as tf
@@ -30,32 +31,76 @@ def get_stopwords(textfile):
 
 
 # Clean hashtags, mentions, special/unwnated/unprintable characters from the tweet.  
-def clean_text(text):
-    
-    # Eliminate unprintable characters
-    text = ''.join(x for x in text if x.isprintable())
+def clean_text(text, stop_words): 
+  START_OF_LINE = r"^"
+  OPTIONAL = "?"
+  ANYTHING = "."
+  ZERO_OR_MORE = "*"
+  ONE_OR_MORE = "+"
 
-    # Eliminate urls
-    text = re.sub(r'https?://\S+|www\.\S+', '', text)
+  SPACE = "\s"
+  SPACES = SPACE + ONE_OR_MORE
+  NOT_SPACE = "[^\s]" + ONE_OR_MORE
+  EVERYTHING_OR_NOTHING = ANYTHING + ZERO_OR_MORE
 
-    # Eliminate html elements
-    text = re.sub(r'<.*?>', '', text)
+  ERASE = ""
+  FORWARD_SLASH = "\/"
+  NEWLINES = r"[\r\n]"
 
-    # Eliminate punctuations
-    text = re.sub('[!#?,.:";-@#$%^&*_~<>()-]', '', text)
+  arabic_diacritics = re.compile("""
+                             ّ    | # Shadda
+                             َ    | # Fatha
+                             ً    | # Tanwin Fath
+                             ُ    | # Damma
+                             ٌ    | # Tanwin Damm
+                             ِ    | # Kasra
+                             ٍ    | # Tanwin Kasr
+                             ْ    | # Sukun
+                             ـ     # Tatwil/Kashida
+                         """, re.VERBOSE)
+
+  punctuations = '''`÷×؛<>_()*&^%][ـ،/:"؟.,'{}~¦+|!”…“–ـ''' + string.punctuation
+  print(str(text))
+  #mentions
+  text = re.sub('@[\w]+','', text)
+
+  #RT
+  RE_TWEET = "RT" + SPACES
+  text = re.sub(RE_TWEET,'', text)
+
+  #hyperlink
+  HYPERLINKS = ("http" + "s" + OPTIONAL + ":" + FORWARD_SLASH + FORWARD_SLASH
+            + NOT_SPACE + NEWLINES + ZERO_OR_MORE)
+  text = re.sub(HYPERLINKS,ERASE, text)
+
+  #hash
+  text = re.sub('#',ERASE, text)
+
+  #punctuation
+  translator = str.maketrans('', '', punctuations)
+  text = text.translate(translator)
+
+  #diacritics
+  text = re.sub(arabic_diacritics, '', text)
+
+  #longation
+  text = re.sub("[إأآا]", "ا", text)
+  text = re.sub("ى", "ي", text)
+  text = re.sub("ؤ", "ء", text)
+  text = re.sub("ئ", "ء", text)
+  text = re.sub("ة", "ه", text)
+  text = re.sub("گ", "ك", text)
+
+  #stopwords
+  text = ' '.join(word for word in text.split() if word not in stop_words)
+
+  #emojis and emoticons
+  #-----
   
-    # Eliminating hashtags (keeping original word)
-    text = re.sub(r'#', '', text) 
-      
-    # Eliminating special characters like retweet text "RT" 
 
-    text = re.sub(r'(\\x(.)*)', '',text)
-    text = re.sub(r'\\n|\\t|\\n\\n', ' ', text)
-    text = re.sub(r"b'RT|b'|b RT|b\"RT|b", "", text)
-    text = re.sub("[@#$%^&*)(}{|/><=+=_:\"\\\\]+"," ",text).strip()
-
-    return text
-
+  return text
+    
+   
 
 # Tokenize input text to integer-id sequences using keras Tokenizer.
 def tokenize_text(corpus, x_train, x_val):
