@@ -26,7 +26,7 @@ def read_data(path):
 # Extract all stopwords from a text file and store them in a list.
 def get_stopwords(textfile):
   stopwords = []
-  file = open(textfile, "r")
+  file = open(textfile, "r", encoding = "utf-8")
   for line in file:
     line = line.replace("\n","")
     stopwords.append(line)
