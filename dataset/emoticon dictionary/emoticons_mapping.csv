@@ -2410,8 +2410,8 @@ emoticon,english_translation,arabic_translation
 8D,"Laughing, big grin or laugh with glasses",يضحك ، ابتسامة كبيرة أو تضحك مع النظارات
 X‑D,"Laughing, big grin or laugh with glasses",يضحك ، ابتسامة كبيرة أو تضحك مع النظارات
 XD,"Laughing, big grin or laugh with glasses",يضحك ، ابتسامة كبيرة أو تضحك مع النظارات
-=D,"Laughing, big grin or laugh with glasses",يضحك ، ابتسامة كبيرة أو تضحك مع النظارات
-=3,"Laughing, big grin or laugh with glasses",يضحك ، ابتسامة كبيرة أو تضحك مع النظارات
+#NAME?,"Laughing, big grin or laugh with glasses",يضحك ، ابتسامة كبيرة أو تضحك مع النظارات
+3,"Laughing, big grin or laugh with glasses",يضحك ، ابتسامة كبيرة أو تضحك مع النظارات
 B\^D,"Laughing, big grin or laugh with glasses",يضحك ، ابتسامة كبيرة أو تضحك مع النظارات
 :-\)\),Very happy,سعيد جدا
 :‑\(,"Frown, sad, andry or pouting",عبوس ، حزين ، أندري أو عابس
@@ -2466,7 +2466,7 @@ XP,"Tongue sticking out, cheeky, playful or blowing a raspberry",اللسان ب
 :Þ,"Tongue sticking out, cheeky, playful or blowing a raspberry",اللسان بارز أو صفيق أو مرح أو ينفخ التوت
 :b,"Tongue sticking out, cheeky, playful or blowing a raspberry",اللسان بارز أو صفيق أو مرح أو ينفخ التوت
 d:,"Tongue sticking out, cheeky, playful or blowing a raspberry",اللسان بارز أو صفيق أو مرح أو ينفخ التوت
-=p,"Tongue sticking out, cheeky, playful or blowing a raspberry",اللسان بارز أو صفيق أو مرح أو ينفخ التوت
+#NAME?,"Tongue sticking out, cheeky, playful or blowing a raspberry",اللسان بارز أو صفيق أو مرح أو ينفخ التوت
 >:P,"Tongue sticking out, cheeky, playful or blowing a raspberry",اللسان بارز أو صفيق أو مرح أو ينفخ التوت
 :‑/,"Skeptical, annoyed, undecided, uneasy or hesitant",متشكك ، منزعج ، متردد ، مضطرب أو متردد
 :/,"Skeptical, annoyed, undecided, uneasy or hesitant",متشكك ، منزعج ، متردد ، مضطرب أو متردد
@@ -2477,7 +2477,7 @@ d:,"Tongue sticking out, cheeky, playful or blowing a raspberry",اللسان ب
 =/,"Skeptical, annoyed, undecided, uneasy or hesitant",متشكك ، منزعج ، متردد ، مضطرب أو متردد
 =[(\\)],"Skeptical, annoyed, undecided, uneasy or hesitant",متشكك ، منزعج ، متردد ، مضطرب أو متردد
 :L,"Skeptical, annoyed, undecided, uneasy or hesitant",متشكك ، منزعج ، متردد ، مضطرب أو متردد
-=L,"Skeptical, annoyed, undecided, uneasy or hesitant",متشكك ، منزعج ، متردد ، مضطرب أو متردد
+#NAME?,"Skeptical, annoyed, undecided, uneasy or hesitant",متشكك ، منزعج ، متردد ، مضطرب أو متردد
 :S,"Skeptical, annoyed, undecided, uneasy or hesitant",متشكك ، منزعج ، متردد ، مضطرب أو متردد
 :‑\|,Straight face,وجه مستقيم
 :\|,Straight face,وجه مستقيم
@@ -2491,7 +2491,7 @@ d:,"Tongue sticking out, cheeky, playful or blowing a raspberry",اللسان ب
 O:‑\),"Angel, saint or innocent",ملاك ، قديس أو بريء
 O:\),"Angel, saint or innocent",ملاك ، قديس أو بريء
 0:‑3,"Angel, saint or innocent",ملاك ، قديس أو بريء
-0:3,"Angel, saint or innocent",ملاك ، قديس أو بريء
+0:03,"Angel, saint or innocent",ملاك ، قديس أو بريء
 0:‑\),"Angel, saint or innocent",ملاك ، قديس أو بريء
 0:\),"Angel, saint or innocent",ملاك ، قديس أو بريء
 :‑b,"Tongue sticking out, cheeky, playful or blowing a raspberry",اللسان بارز أو صفيق أو مرح أو ينفخ التوت
@@ -2557,7 +2557,7 @@ Q_Q,Sad or Crying,حزين أو بكاء
 \(=_=\),Tired,متعبه
 \(=\^\·\^=\),cat,قط
 \(=\^\·\·\^=\),cat,قط
-=_\^=	,cat,قط
+"=_\^=	",cat,قط
 \(\.\.\),Looking down,انظر اسفل
 \(\._\.\),Looking down,انظر اسفل
 \^m\^,Giggling with hand covering mouth,يضحكون بيدك تغطي الفم
@@ -2606,3 +2606,21 @@ o\.O,Surpised,مندهش
 oO,Surprised,مندهش
 \(\*￣m￣\),Dissatisfied,غير راض
 \(‘A`\),Snubbed or Deflated,مغفل أو مفرغ من الهواء
+??,Heart,???
+?,Hand,??? ????
+???,sad,????
+?,Sparkle,????
+??,victory_hand,?? ?????
+?,Heart,???
+?,Heart,???
+??,Heart,???
+?,Hand,??? ????
+??,Exclaim,????? ????
+?,cross,????? ?????
+??,Football,??? ?????
+??,sun,???
+??,Smile,??? ?????
+?,smile,??? ?????
+??,Star,????
+?,tick,????? ????????
+?,Tea ,???
