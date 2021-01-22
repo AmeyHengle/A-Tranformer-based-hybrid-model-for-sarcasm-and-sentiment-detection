@@ -150,16 +150,20 @@ def get_word_embeddings(filepath, vocab, embedding_dimension):
   count = 0
 
   for line in embedding_file:
-    line = line.split()
-    word = line[0]
-    if word in vocab:
-      word_vector = np.asarray(line[1:], dtype = "float32")
-      if len(word_vector) == embedding_dimension:
-        word_embeddings[vocab[word]] = word_vector
-      else:
-        print('\nVector size does not match with embedding_dimension:\t', word_vector)
-      count+=1
-
+    try:
+        line = line.split()
+        word = line[0]
+        if word in vocab:
+          word_vector = np.asarray(line[1:], dtype = "float32")
+          if len(word_vector) == embedding_dimension:
+            word_embeddings[vocab[word]] = word_vector
+          else:
+            print('\nVector size does not match with embedding_dimension:\t', word_vector)
+          count+=1
+    
+    except exception as e:
+        print("Exception:",e,"\n\n",line)
+  
   print("Total word embeddings read: {}\n".format(count))
   embedding_file.close()
   return word_embeddings     
