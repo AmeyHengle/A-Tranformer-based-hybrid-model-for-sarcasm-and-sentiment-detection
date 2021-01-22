@@ -122,3 +122,4 @@ def BILSTM_2(input_length, input_dimension, embedding_dimension, output_dimensio
     # Compile and return
     model.compile(optimizer = "adam", loss = "sparse_categorical_crossentropy", metrics = ["acc"])
     return model
+
