@@ -155,5 +155,5 @@ def CNN_GRU(input_length, input_dimension, embedding_dimension, output_dimension
   model.add(Dropout(dropout_rate))
   #model.add(Dense(16, activation='relu'))
   model.add((Dense(output_dimension, activation='softmax')))
-  model.compile(optimizer = "adam", loss = "sparse_categorical_crossentropy", metrics = [tf.metrics.Precision(), tf.metrics.Recall()])
+  model.compile(optimizer = "adam", loss = "sparse_categorical_crossentropy", metrics = ['acc'])
   return model
