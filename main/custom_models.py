@@ -2,7 +2,7 @@
 
 import tensorflow as tf
 from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Embedding, Dense, GlobalMaxPooling1D, MaxPooling1D, Conv1D, Dropout, GlobalAveragePooling1D,LSTM, Bidirectional, TimeDistributed, Flatten
+from tensorflow.keras.layers import Embedding, Dense, GlobalMaxPooling1D, MaxPooling1D, Conv1D, Dropout, GlobalAveragePooling1D,LSTM, Bidirectional, TimeDistributed, Flatten, GRU
 
 
 # -----------------------------------------------CUSTOM CALLBACK CLASS-------------------------------------------------
