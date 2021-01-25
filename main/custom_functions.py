@@ -110,25 +110,16 @@ def clean_text(text):
   return text
 
 #Preprocess text using Farasa 
-def preprocess(text_df):
-  """Takes in data ['tweet'] and returns a list of preprocessed
-  tweets"""
-
-  text_data = text_df.values.tolist()
-  preprocessed_text = []
-
+def preprocess(text):
   segmenter = FarasaSegmenter()
   diacratizer = FarasaDiacritizer()
   stemmer = FarasaStemmer()
 
-  for text in text_data:
-    text = segmenter.segment(text)
-    text = diacratizer.diacritize(text)
-    text = stemmer.stem(text)
-    preprocessed_text.append(text)
+  text = segmenter.segment(text)
+  text = diacratizer.diacritize(text)
+  text = stemmer.stem(text)
   
-  return preprocessed_text
-
+  return text
 
 # Tokenize input text to integer-id sequences using keras Tokenizer.
 def tokenize_text(corpus, x_train, x_val):
