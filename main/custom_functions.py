@@ -121,20 +121,6 @@ def preprocess(text):
   
   return text
 
-#remove emojis
-def find_emojis(filepath, match):
-    emoji_corpus = pd.read_csv(filepath)
-    emoji_set = set(match.group(0))
-    print(emoji_set)
-    for emoji in emoji_set:
-        if emoji in emoji_corpus['emoticon']:
-            q = f"emoticon == {emoji}"
-            return emoji_corpus.query(q)['arabic_translation']
-
-def preprocess_emojis(emoji_file,df):
-    df = df.str.replace(r'\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff]', find_emojis)
-    return df
-
 # Tokenize input text to integer-id sequences using keras Tokenizer.
 def tokenize_text(corpus, x_train, x_val):
   tokenizer = Tokenizer(oov_token = "[OOV]")
