@@ -5,6 +5,7 @@ import numpy as np
 import re
 import string
 from matplotlib import pyplot as plt
+import pickle
 
 import tensorflow as tf
 from tensorflow.keras.preprocessing import sequence
@@ -173,31 +174,116 @@ def get_label_encoding(labels):
 
 # Extracts words and their corresponding vectors from a .vec/.txt file.
 # Returns a word x embedding matrix 
-def get_word_embeddings(filepath, vocab, embedding_dimension):
 
-  word_embeddings = np.zeros((len(vocab) + 1, embedding_dimension))
-#   word_embeddings = []
-  embedding_file = open(filepath, "r", encoding = "utf8")
-  count = 0
+# def get_word_embeddings(filepath, vocab, embedding_dimension):
 
-  for line in embedding_file:
-    try:
-        line = line.split()
-        word = line[0]
-        if word in vocab:
-          word_vector = np.asarray(line[1:], dtype = "float32")
-          if len(word_vector) == embedding_dimension:
-            word_embeddings[vocab[word]] = word_vector
-          else:
-            print('\nVector size does not match with embedding_dimension:\t', word_vector)
-          count+=1
+#   word_embeddings = np.zeros((len(vocab) + 1, embedding_dimension))
+# #   word_embeddings = []
+#   embedding_file = open(filepath, "r", encoding = "utf8")
+#   count = 0
+
+#   for line in embedding_file:
+#     try:
+#         line = line.split()
+#         word = line[0]
+#         if word in vocab:
+#           word_vector = np.asarray(line[1:], dtype = "float32")
+#           if len(word_vector) == embedding_dimension:
+#             word_embeddings[vocab[word]] = word_vector
+#           else:
+#             print('\nVector size does not match with embedding_dimension:\t', word_vector)
+#           count+=1
     
-    except exception as e:
-        print("Exception:",e,"\n\n",line)
+#     except exception as e:
+#         print("Exception:",e,"\n\n",line)
   
-  print("Total word embeddings read: {}\n".format(count))
-  embedding_file.close()
-  return word_embeddings     
+#   print("Total word embeddings read: {}\n".format(count))
+#   embedding_file.close()
+#   return word_embeddings 
+
+
+def get_word_embeddings(filepath, vocab, ft = False, save_embeddings = False):
+  
+  binary = False
+  embedding_dimension = 0
+  embedding_dict = {}
+
+  if ft == True:
+    word_vectors = fasttext.load_model(filepath)
+    embedding_dimension = len(get_word_vector(list(word_vectors.get_words())[0]))
+    print("File loaded. Total Words: {},\t Embedding Dimension: {}".format(len(word_vectors.get_words()), embedding_dimension))
+
+    for word in vocab:
+      try:
+        wv = word_vectors.get_word_vector[word]
+        embedding_dict[word] = wv
+
+      except Exception as e:
+        print("Exception reading vector for word:  {}, \n Exception : {} \n".format(word, e))
+        continue
+
+    print("Total embeddings found: {}\n\n".format(len(embedding_dict)))
+
+  else:
+    if ".bin" in filepath :
+      print("Processing binary file")
+      binary = True
+      
+    print("Loading vectors from: {} \n".format(filepath))
+    word_vectors =  KeyedVectors.load_word2vec_format(filepath,binary=binary)
+
+    embedding_dimension = len(list(word_vectors.vectors)[0])
+    print("File loaded. Total Words: {},\t Embedding Dimension: {}".format(len(word_vectors.vocab), embedding_dimension))
+  
+  for word in vocab:
+    try:
+      wv = word_vectors.wv[word]
+      embedding_dict[word] = wv
+
+    except Exception as e:
+      print("Exception reading vector for word:  {}, \n Exception : {} \n".format(word, e))
+      continue
+
+  print("Total embeddings found: {}\n\n".format(len(embedding_dict)))
+
+  if save_embeddings == True:
+    output_file = filepath.split('.')[0] + '.pkl'
+    with open(output_file, 'wb') as handle:
+        pickle.dump(embedding_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    print("Word embeddings saved to {} \n\n".format(output_file))
+
+  return embedding_dict
+
+
+def get_embedding_matrix(vocab, embedding_dict_file = "", embedding_dict = {}, embedding_dimension = 100):
+  except_count = 0
+
+  if not embedding_dict:
+    try:
+        print("Loading embeddings from: ",embedding_dict_file)
+        with open(embedding_dict_file, "rb") as f:
+            embedding_dict = pickle.load(f)
+    except Exception as e:
+        print("\nException: ",e)
+        
+#   vocab_size = len(embedding_dict.keys()) + 1
+  vocab_size = len(vocab) + 1
+  embedding_matrix = np.zeros((vocab_size, embedding_dimension))
+
+
+  for i, word in enumerate(vocab):
+    try:
+      embedding_matrix[i] = embedding_dict[word]
+    except Exception as e:
+#       print("Exception reading vector for word:  {}, \n Exception : {} \n".format(word, e))
+      except_count += 1
+      continue
+
+  print("\nTotal words processed: {}".format(len(embedding_matrix) - except_count))
+  print("Words not found: ", except_count)
+    
+  return embedding_matrix
+
 
 
 # Different methods of getting sentence/document embeddings from word vectors. 
