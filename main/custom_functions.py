@@ -67,8 +67,7 @@ def clean_text(text):
   #                            ـ     # Tatwil/Kashida
   #                        """, re.VERBOSE)
 
-  # punctuations = '''`÷×؛<>_()*&^%][ـ،/:"؟.,'{}~¦+|!”…“–ـ''' + string.punctuation
-  # print(str(text))
+  punctuations = '''`÷×؛<>_()*&^%][ـ،/:"؟.,'{}~¦+|!”…“–ـ''' + string.punctuation
 
   #mentions
   text = re.sub('@[\w]+','', text)
@@ -86,8 +85,8 @@ def clean_text(text):
   text = re.sub('#',ERASE, text)
 
   #punctuation
-  # translator = str.maketrans('', '', punctuations)
-  # text = text.translate(translator)
+  translator = str.maketrans('', '', punctuations)
+  text = text.translate(translator)
 
   #diacritics
   # text = re.sub(arabic_diacritics, '', text)
@@ -121,19 +120,23 @@ def preprocess(text):
   
   return text
 
-#remove emojis
-def preprocess_emojis(emoji_file,df):
-    def find_emojis(match):
-      emoji_corpus = pd.read_csv(emoji_file)
-      emoji_set = set(match.group(0))
-      print(emoji_set)
-      for emoji in emoji_set:
-          if emoji in emoji_corpus['emoticon']:
-              q = f"emoticon == {emoji}"
-              return emoji_corpus.query(q)['arabic_translation']
-    df = df.str.replace(r'\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff]', find_emojis)
-    return df
 
+# Preprocess Emojis
+def preprocess_emojis(emoji_mapping, tweet):
+    processed_tweet = ""
+    
+    for character in tweet:
+        if character in emoji_mapping:
+#             print(character, "--->", emoji_mapping[character])
+            processed_tweet = processed_tweet + emoji_mapping[character] + " "
+        else:
+            processed_tweet = processed_tweet + character
+
+    for word in tweet:
+        if word in emoji_mapping:
+            processed_tweet = processed_tweet.replace(word, emoji_mapping[word] + " ")
+    
+    return processed_tweet
 
 # Tokenize input text to integer-id sequences using keras Tokenizer.
 def tokenize_text(corpus, x_train, x_val):
