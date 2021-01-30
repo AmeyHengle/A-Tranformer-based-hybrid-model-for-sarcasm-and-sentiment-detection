@@ -6,6 +6,7 @@ import re
 import string
 from matplotlib import pyplot as plt
 import pickle
+from string import punctuation
 
 import tensorflow as tf
 from tensorflow.keras.preprocessing import sequence
@@ -108,6 +109,21 @@ def clean_text(text):
   
 
   return text
+
+def clean_special_characters(sample):
+  cleaned = ""
+  for word in sample:
+    for character in word:
+      if not character in punctuation:
+        if character == "R" or character == "T":
+          continue
+        else: 
+          cleaned = cleaned + character
+      else:
+        continue
+
+  return cleaned
+
 
 #Preprocess text using Farasa 
 def preprocess(text):
