@@ -331,9 +331,9 @@ def get_sentence_embedding(embedding_matrix, corpus, option='bow'):
 
 
 def load_from_pickle(filepath):
-    file = open(filepath, "r",encoding = "utf8")
-    data = pickle.load(file)
-    return data
+  file = open(filepath, "rb")
+  data = pickle.load(file)
+  return data
     
 # Save Fasttext trained embeddings to a .vec file.
 def save_fasttext_embeddings(model, output_file):
