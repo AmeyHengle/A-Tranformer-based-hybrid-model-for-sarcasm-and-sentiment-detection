@@ -6,6 +6,7 @@ import re
 import string
 from matplotlib import pyplot as plt
 import pickle
+from string import punctuation
 
 import tensorflow as tf
 from tensorflow.keras.preprocessing import sequence
@@ -108,6 +109,21 @@ def clean_text(text):
   
 
   return text
+
+def clean_special_characters(sample):
+  cleaned = ""
+  for word in sample:
+    for character in word:
+      if not character in punctuation:
+        if character == "R" or character == "T":
+          continue
+        else: 
+          cleaned = cleaned + character
+      else:
+        continue
+
+  return cleaned
+
 
 #Preprocess text using Farasa 
 def preprocess(text):
@@ -315,9 +331,9 @@ def get_sentence_embedding(embedding_matrix, corpus, option='bow'):
 
 
 def load_from_pickle(filepath):
-    file = open(filepath, "r",encoding = "utf8")
-    data = pickle.load(file)
-    return data
+  file = open(filepath, "rb")
+  data = pickle.load(file)
+  return data
     
 # Save Fasttext trained embeddings to a .vec file.
 def save_fasttext_embeddings(model, output_file):
