@@ -1,3 +1,4 @@
+        ID              Word     Label            Tweet
 783597390070685696	أبل	positive	"رئيس شركة أبل: الواقع المعزز سيصبح أهم من الطعامhttps://t.co/VQyBwD3Sw4@RoayahNews https://t.co/EYj3ewE7JY"
 783643296602071040	أبل	positive	"أبل والجسار تفقدا مدينة «صباح الأحمد»: تذليل الصعوبات لاستكمال الخدمات في المدينة<br /> - محليات - https://t.co/F2K0iCMiIu"
 783708331198164992	أبل	negative	"سمعة «أبل» على المحك.. مشكلة حقيقية في «آيفون 7» https://t.co/iMXoE8jbfK https://t.co/5HLUJ3DQHC"
