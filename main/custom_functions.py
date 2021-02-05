@@ -29,11 +29,12 @@ def read_data(path):
 
 
 
-def remove_stopwords(corpus, stopwords):
+def remove_stopwords(corpus):
   for tweet in corpus:
     for word in tweet.split():
-      if word in stopwords:
+      if word in STOP_WORDS:
         tweet.replace(word, ' ')
+
 # Extract all stopwords from a text file and store them in a list.
 def get_stopwords(textfile):
   stopwords = []
