@@ -393,3 +393,12 @@ def save_model(model, name):
     print("Saved as ",name)
   except Exception as e:
     print(e)
+
+
+def find_emojis(match):
+    emoji_set = set(match.group(0))
+    print(emoji_set)
+    for emoji in emoji_set:
+        if emoji in emoji_corpus['emoticon']:
+            q = f"emoticon == {emoji}"
+            return emoji_corpus.query(q)['arabic_translation']
