@@ -10,6 +10,7 @@ This repository contains the code my team SPPU_AASM's submission for the WANLP A
 The proposed system is deep multi-chanel hybrid model which combines the word representations from pretrained AraBERT (A transformer-based language model trained on Arabic Wikipedia and news corpora), and pretrained Mazajak word embeddings (word2vec-based static word vectors trained on Twitter).
 
 # Model Architecture
+<img src="Model Architecture Diagram.png" height="480">
 
 
 # Simulation Results
