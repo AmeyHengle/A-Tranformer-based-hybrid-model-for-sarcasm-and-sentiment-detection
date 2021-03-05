@@ -42,7 +42,7 @@ The proposed system is deep multi-chanel hybrid model which combines the word re
 |Model|Accuracy|Precision|Recall|F1-Macro|F1-Sarcastic|
 |:-------|:--------|:-------|:--------|:--------|:--------|
 |Abu farah|1744|3697|4598|10039|
-|AraBERT|436|925|1149|2510|
+|AraBERT|0.85|0.75|0.78|0.77|0.52|
 |AraBERT + CNN-BiLSTM|**0.86**|**0.76**|**0.78**|**0.77**|**0.62**|
 |:-------|:--------|:-------|:--------|:--------|:--------|
 |AraBERT + CNN-BiLSTM (Official results on test set)|0.7410|0.7031|0.7447|0.7096|0.6140|
