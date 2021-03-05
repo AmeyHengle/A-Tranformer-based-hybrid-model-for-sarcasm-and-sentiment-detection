@@ -5,6 +5,16 @@ This repository contains the code my team SPPU_AASM's submission for the WANLP A
 
 **Subtask 2 (Sentiment Analysis):** Identifying the sentiment of a tweet and assigning one of three labels (Positive, Negative, Neutral), multiclass classification task.
 
+# Dataset
+| Set | Positive | Negative | Neutral | Total |
+|:-------|:--------|:-------|:--------|:-------|
+
+| Training | 1744 | 3697 | 4598 | 10039 |
+| Validation | 436 | 925 | 1149 | 2510 |
+| Testing | 575 | 1677 | 748 | 3000 |
+| Total | 2755 | 6298 | 6495 | 15548 |
+
+
 
 # Proposed System
 The proposed system is deep multi-chanel hybrid model which combines the word representations from pretrained AraBERT (A transformer-based language model trained on Arabic Wikipedia and news corpora), and pretrained Mazajak word embeddings (word2vec-based static word vectors trained on Twitter).
