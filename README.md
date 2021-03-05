@@ -43,8 +43,8 @@ The proposed system is deep multi-chanel hybrid model which combines the word re
 |:-------|:--------|:-------|:--------|:--------|:--------|
 |Abu farah|-|0.62|0.38|0.46|0.44|
 |AraBERT|0.85|0.75|0.78|0.77|0.52|
-|AraBERT + CNN-BiLSTM|**0.86**|**0.76**|**0.78**|**0.77**|**0.62**|
-|AraBERT + CNN-BiLSTM (test set)|0.7410|0.7031|0.7447|0.7096|0.6140|
+|AraBERT + CNN-BiLSTM|0.86|0.76|0.78|.77|0.62|
+|**AraBERT + CNN-BiLSTM (test set)**|**0.7410**|**0.7031**|**0.7447**|**0.7096**|**0.6140**|
 
 <br>
 
