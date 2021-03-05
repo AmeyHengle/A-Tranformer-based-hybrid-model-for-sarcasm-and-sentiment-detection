@@ -7,19 +7,26 @@ This repository contains the code my team SPPU_AASM's submission for the WANLP A
 
 # Dataset
 
-|Set|Positive|Negative|Neutral|Total|
-|:-------|:--------|:-------|:--------|:--------|
-|Training|1744|3697|4598|10039|
-|Validation|0.7976|0.9342|0.8949|2510|
-|Testing|575|1677|748|3000|
-|Testing|2755|6298|6495|15548|
 
+**Label-wise distribution for subtask-1**
 |Set|True|False|Total|
 |:-------|:--------|:-------|:--------|
 |Training|1734|8305|10039|
 |Validation|434|2076|2510|
 |Testing|821|2179|3000|
 |Testing|2989|12559|15548|
+
+<br><br>
+
+**Label-wise distribution for subtask-2**
+|Set|Positive|Negative|Neutral|Total|
+|:-------|:--------|:-------|:--------|:--------|
+|Training|1744|3697|4598|10039|
+|Validation|436|925|1149|2510|
+|Testing|575|1677|748|3000|
+|Testing|2755|6298|6495|15548|
+<br>
+
 
 
 # Proposed System
