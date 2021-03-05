@@ -6,8 +6,9 @@ This repository contains the code my team SPPU_AASM's submission for the WANLP A
 **Subtask 2 (Sentiment Analysis):** Identifying the sentiment of a tweet and assigning one of three labels (Positive, Negative, Neutral), multiclass classification task.
 
 # Dataset
+
 | Set | Positive | Negative | Neutral | Total |
-|:-------|:--------|:-------|:--------|:-------|
+|:------- |:-------- |:------- |:-------- |:------- |
 
 | Training | 1744 | 3697 | 4598 | 10039 |
 | Validation | 436 | 925 | 1149 | 2510 |
