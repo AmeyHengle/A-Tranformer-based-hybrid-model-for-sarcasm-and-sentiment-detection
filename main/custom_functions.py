@@ -28,13 +28,6 @@ def read_data(path):
   return data
 
 
-
-def remove_stopwords(corpus):
-  for tweet in corpus:
-    for word in tweet.split():
-      if word in STOP_WORDS:
-        tweet.replace(word, ' ')
-
 # Extract all stopwords from a text file and store them in a list.
 def get_stopwords(textfile):
   stopwords = []
@@ -44,7 +37,6 @@ def get_stopwords(textfile):
     stopwords.append(line)
   file.close()
   return stopwords
-
 
 # Clean hashtags, mentions, special/unwnated/unprintable characters from the tweet. 
  
@@ -195,34 +187,24 @@ def get_label_encoding(labels):
   return label_encodings
 
 
-# Extracts words and their corresponding vectors from a .vec/.txt file.
-# Returns a word x embedding matrix 
+def prepare_training_data(x_train, x_val, max_seq_len, padding_type, truncating_type):
+#     x_train = D_train[text_label].values.tolist()
+#     x_val = D_val[text_label].values.tolist()
 
-# def get_word_embeddings(filepath, vocab, embedding_dimension):
 
-#   word_embeddings = np.zeros((len(vocab) + 1, embedding_dimension))
-# #   word_embeddings = []
-#   embedding_file = open(filepath, "r", encoding = "utf8")
-#   count = 0
+    corpus = x_train + x_val
+    tokenizer, x_train_tokenized, x_val_tokenized = tokenize_text(corpus,x_train, x_val)
 
-#   for line in embedding_file:
-#     try:
-#         line = line.split()
-#         word = line[0]
-#         if word in vocab:
-#           word_vector = np.asarray(line[1:], dtype = "float32")
-#           if len(word_vector) == embedding_dimension:
-#             word_embeddings[vocab[word]] = word_vector
-#           else:
-#             print('\nVector size does not match with embedding_dimension:\t', word_vector)
-#           count+=1
-    
-#     except exception as e:
-#         print("Exception:",e,"\n\n",line)
-  
-#   print("Total word embeddings read: {}\n".format(count))
-#   embedding_file.close()
-#   return word_embeddings 
+    print('\nx_train_tokenized:',len(x_train_tokenized),'\nx_val_tokenized:',len(x_val_tokenized),
+          "\nTotal Vocab: ",len(tokenizer.word_counts))
+
+    # Pad Tweets
+    x_train_padded = pad_text_sequence(x_train_tokenized, max_seq_len, padding_type, truncating_type)
+    x_val_padded = pad_text_sequence(x_val_tokenized, max_seq_len, padding_type, truncating_type)
+
+    print('\nx_train_padded:',x_train_padded.shape,'\nx_val_padded',x_val_padded.shape,"\n")
+
+    return tokenizer, x_train_padded, x_val_padded
 
 
 def get_word_embeddings(filepath, vocab, ft = False, save_embeddings = False):
@@ -342,6 +324,7 @@ def load_from_pickle(filepath):
   data = pickle.load(file)
   return data
     
+    
 # Save Fasttext trained embeddings to a .vec file.
 def save_fasttext_embeddings(model, output_file):
     file = open(output_file, "w",encoding='utf')
@@ -393,12 +376,4 @@ def save_model(model, name):
     print("Saved as ",name)
   except Exception as e:
     print(e)
-
-
-def find_emojis(match):
-    emoji_set = set(match.group(0))
-    print(emoji_set)
-    for emoji in emoji_set:
-        if emoji in emoji_corpus['emoticon']:
-            q = f"emoticon == {emoji}"
-            return emoji_corpus.query(q)['arabic_translation']
+    
